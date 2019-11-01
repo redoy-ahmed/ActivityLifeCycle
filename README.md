@@ -1,4 +1,4 @@
-Activity Life Cycle Example
+Activity LifeCycle Example
 
 1. MainActivity
 
@@ -22,5 +22,8 @@ Then if we come back to our app again, we can see logcat print output as follows
 Then if we kill our app, we can see logcat print output as follows:
 
 ---> onDestroy: onDestroy called
+
+
+onCreate and onDestroy methods are called only once throughout the LifeCycle
 
 Pretty Clear HUH ! 👌🙀
