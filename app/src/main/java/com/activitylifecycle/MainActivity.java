@@ -1,10 +1,12 @@
 package com.activitylifecycle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +23,8 @@ public class MainActivity extends AppCompatActivity implements AddFragment.OnFra
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         Log.wtf(TAG, "onCreate called");
 
@@ -49,6 +53,15 @@ public class MainActivity extends AppCompatActivity implements AddFragment.OnFra
                 transaction.replace(R.id.replaceFragmentContainer, fragment, ReplaceFragment.class.getSimpleName());
                 transaction.addToBackStack(null);
                 transaction.commit();
+            }
+        });
+
+        Button openActivityButton = findViewById(R.id.openActivityButton);
+        openActivityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SomeActivity.class);
+                startActivity(intent);
             }
         });
     }
