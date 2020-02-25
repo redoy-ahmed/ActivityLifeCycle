@@ -10,10 +10,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
-public class SomeFragment extends Fragment {
-    private static final String TAG = SomeFragment.class.getSimpleName();
+public class ReplaceFragment extends Fragment {
+    private static final String TAG = AddFragment.class.getSimpleName();
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -22,12 +23,14 @@ public class SomeFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public SomeFragment() {
+    private TextView replaceFragmentTextView;
+
+    public ReplaceFragment() {
         // Required empty public constructor
     }
 
-    public static SomeFragment newInstance(String param1, String param2) {
-        SomeFragment fragment = new SomeFragment();
+    public static ReplaceFragment newInstance(String param1, String param2) {
+        ReplaceFragment fragment = new ReplaceFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -39,7 +42,6 @@ public class SomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.wtf(TAG, "onCreate called");
-
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -50,7 +52,12 @@ public class SomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.wtf(TAG, "onCreateView called");
-        return inflater.inflate(R.layout.fragment_some, container, false);
+        View view = inflater.inflate(R.layout.fragment_replace, container, false);
+        replaceFragmentTextView = view.findViewById(R.id.replaceFragmentTextView);
+        if (mParam2 != null) {
+            replaceFragmentTextView.setText(mParam2);
+        }
+        return view;
     }
 
     public void onButtonPressed(Uri uri) {
@@ -62,7 +69,6 @@ public class SomeFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        Log.wtf(TAG, "onAttach called");
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
@@ -105,7 +111,7 @@ public class SomeFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Log.wtf(TAG, "onDestroView called");
+        Log.wtf(TAG, "onDestroyView called");
     }
 
     public interface OnFragmentInteractionListener {
